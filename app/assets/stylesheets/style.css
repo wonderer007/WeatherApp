@@ -1,9 +1,74 @@
-h1 {
+body {
+  background: #f6f6f6;
+}
+h3 {
   padding: 10px;
 }
 .loader {
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
-  height: 800px;
+  height: 500px;
+}
+.spinner {
+  width: 12rem !important;
+  height: 12rem !important;
+}
+.status {
+  position: relative;
+  top: -100px;
+}
+.temprature {
+
+}
+.temprature h1 {
+  font-size: 110px;
+}
+
+.timezone {
+  display: flex;
+}
+
+.timezone a {
+  text-decoration: none;
+}
+
+.timezone p {
+  color: #878787;
+  font-size: 24px;
+}
+
+.timezone small {
+  position: relative;
+  top: 10px
+}
+
+.time {
+  color: #878787;
+  font-size: 20px;
+}
+
+.weatherInfo {
+  color: #878787;
+}
+
+.scale {
+  text-align: right;
+  position: relative;
+  top: -25px;
+  left: -80px;
+}
+.scale span {
+  text-decoration: none;
+  cursor: pointer;
+}
+.scale .active {
+  color: blue;
+}
+.futureForecast {
+  padding: 20px;
+}
+
+.summary {
+  display: flex;
 }
