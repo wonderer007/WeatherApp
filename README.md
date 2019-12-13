@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This WeatherApp is not a commercial project, its just a test project.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## How to setup project
+- `git clone git@github.com:wonderer007/WeatherApp.git`
+- `cd WeatherApp`
+- `yarn install`
+- `rake db:create`
+- `bundle install`
+- `foreman start -f Procfile.dev`
+- Go to `http://localhost:3000` and make sure your browser can access geolocation
