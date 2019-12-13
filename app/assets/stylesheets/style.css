@@ -1,6 +1,10 @@
 body {
   background: #f6f6f6;
 }
+h1 {
+  padding: 20px;
+  text-transform: uppercase;
+}
 h3 {
   padding: 10px;
 }
@@ -71,4 +75,22 @@ h3 {
 
 .summary {
   display: flex;
+}
+
+@media (max-width: 575.98px) {
+  .temprature h1 {
+    font-size: 110px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .temprature h1 {
+    font-size: 110px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .temprature h1 {
+    font-size: 70px;
+  }
 }

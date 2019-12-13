@@ -30,17 +30,26 @@ export default class HelloWorld extends React.Component {
           fetchingForecast: true
         })
 
-        axios.get('http://localhost:3000/api/forecast')
+        axios.get(`http://localhost:3000/api/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`)
         .then(response => {
-          _this.setState({
-            data: response.data,
-            requestingLocation: false,
-            fetchingForecast: false
-          })
+          if(response.data.latitude && response.data.longitude) {
+            _this.setState({
+              data: response.data,
+              fetchingForecast: false,
+              requestingLocation: false
+            })
+          }
+          else {
+            _this.setState({
+              errorMessage: response.data.error,
+              fetchingForecast: false,
+              requestingLocation: false
+            })
+          }
         })
         .catch(error => {
           _this.setState({
-            errorMessage: error,
+            errorMessage: response.data,
             requestingLocation: false,
             requestingLocation: false
           })
@@ -59,8 +68,8 @@ export default class HelloWorld extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <h3>Weather Forecase</h3>
+      <div className="container">
+        <h1 className="d-flex justify-content-center align-items-center">Weather Forecase</h1>
         <Loader
           requestingLocation={this.state.requestingLocation}
           fetchingForecast={this.state.fetchingForecast}

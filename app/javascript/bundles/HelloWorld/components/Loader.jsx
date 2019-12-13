@@ -49,7 +49,6 @@ export default class Loader extends React.Component {
 
   render() {
     const { requestingLocation, fetchingForecast, errorMessage } = this.props
-
     return (
       <div className="wrapper">
        {

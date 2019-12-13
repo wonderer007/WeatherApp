@@ -6,7 +6,7 @@ export default class Forecast extends React.Component {
     super(props);
 
     this.state = {
-      scale: 'F'
+      scale: 'C'
     }
 
     this.changeTempratureScale = this.changeTempratureScale.bind(this)
@@ -26,10 +26,10 @@ export default class Forecast extends React.Component {
   tempratureScale(temprature) {
     const { scale } = this.state
 
-    if(scale == 'F')
+    if(scale == 'C')
       return temprature
 
-    return ((5/9) * (temprature - 32)).toFixed(2)
+    return ((temprature * 9) / 5 + 32).toFixed(2)
   }
 
   renderCurentTempratureIcon(icon) {
@@ -69,16 +69,16 @@ export default class Forecast extends React.Component {
   renderCurrentTempratureInfo() {
     const _this = this
     const { latitude, longitude, timezone } = this.props.data
-    const { time, summary, icon, temperature, precipType, humidity, windSpeed, visibility } = this.props.data.currently
+    const { time, summary, icon, temperature, precipType, humidity, windSpeed } = this.props.data.currently
 
     return (
       <div>
         <div className="row">
-          <div className="col-md-6 col-xs-6 col-sm-12">
+          <div className="col-md-12 col-xs-12 col-sm-12">
             <div className="info">
               <div className="timezone">
                 <p> <i className="fas fa-map-marker-alt"></i> <b> {timezone} </b> </p>
-                <small>(<a href={`https://www.google.com/maps/@${latitude},${longitude},15z`} target="_blank">{`${latitude},${longitude}`}</a>)</small>
+                <small>(<a href={`https://www.google.com/maps/@${latitude.toFixed(6)},${longitude.toFixed(6)},15z`} target="_blank">{`${latitude.toFixed(6)},${longitude.toFixed(6)}`}</a>)</small>
               </div>
               <div className="time">
                 <p> <i className="fas fa-clock"></i> { moment(time*1000).format('MM/DD/YYYY h:m A') }</p>
@@ -89,13 +89,13 @@ export default class Forecast extends React.Component {
 
         <div className="row">
           <div className="col-md-2 col-sm-6 d-flex justify-content-center align-items-center">
-            <i className={`fas ${this.renderCurentTempratureIcon(icon)} fa-7x`}></i>
+            <i className={`fas ${this.renderCurentTempratureIcon(icon)} fa-5x`}></i>
           </div>
           <div className="col-md-4 col-sm-6 col-xs-6">
             <div className="temprature">
               <h1>{this.tempratureScale(temperature)}</h1>
               <div className="scale">
-                <span className={(this.state.scale == 'F') ? 'active' : ''} onClick={(event) => { _this.changeTempratureScale('F')}}> &#176; F </span> | <span className={(this.state.scale == 'C') ? 'active' : ''} onClick={(event) => { _this.changeTempratureScale('C')}}>&#176; C </span>
+                <span className={(this.state.scale == 'C') ? 'active' : ''} onClick={(event) => { _this.changeTempratureScale('C')}}>&#176; C </span> | <span className={(this.state.scale == 'F') ? 'active' : ''} onClick={(event) => { _this.changeTempratureScale('F')}}> &#176; F </span>
               </div>
             </div>
           </div>
@@ -111,11 +111,7 @@ export default class Forecast extends React.Component {
             </div>
 
             <div className="weatherInfo">
-              <span>Wind Speed</span> : <span> {windSpeed} <small> meters per second</small></span>
-            </div>
-
-            <div className="weatherInfo">
-              <span>Visibility</span> : <span> {visibility} <small> kilometers</small> </span>
+              <span>Wind Speed</span> : <span> {windSpeed} <small> meters per hour</small></span>
             </div>
 
             <div className="weatherInfo">
@@ -168,7 +164,6 @@ export default class Forecast extends React.Component {
               <th scope="col">Summary</th>
               <th scope="col">Wind Speed</th>
               <th scope="col">Humidity</th>
-              <th scope="col">Visibility</th>
             </tr>
           </thead>
           <tbody>
@@ -182,7 +177,6 @@ export default class Forecast extends React.Component {
                     { item.summary }
                   </td>
                   <td>{ item.windSpeed} </td>
-                  <td>{ item.humidity}</td>
                   <td>{ item.humidity}</td>
                 </tr>
               ))
@@ -210,7 +204,6 @@ export default class Forecast extends React.Component {
                 <th scope="col">Summary</th>
                 <th scope="col">Wind Speed</th>
                 <th scope="col">Humidity</th>
-                <th scope="col">Visibility</th>
               </tr>
             </thead>
             <tbody>
@@ -229,7 +222,6 @@ export default class Forecast extends React.Component {
                       { item.summary }
                     </td>
                     <td>{ item.windSpeed} </td>
-                    <td>{ item.humidity}</td>
                     <td>{ item.humidity}</td>
                   </tr>
                 ))
